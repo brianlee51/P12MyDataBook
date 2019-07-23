@@ -20,10 +20,9 @@ public class AboutUs extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         iv = findViewById(R.id.iv);
-        iv.setImageResource(R.mipmap.ic_launcher);
 
-        String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/8/80/Republic_Polytechnic_Logo.jpg";
-        Picasso.with(this).load(imageUrl).into(iv);
+        String imageUrl = "https://i.imgur.com/tGbaZCY.jpg";
+        Picasso.with(this).load(imageUrl).error(R.drawable.error).placeholder(R.drawable.ajax_loader).into(iv);
 
     }
 }

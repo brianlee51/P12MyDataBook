@@ -3,7 +3,9 @@ package sg.edu.rp.c346.p12_mydatabook;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,10 @@ public class AnniversaryFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 String text = et.getText().toString();
                                 tv.setText(text);
+                                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("Anni", text);
+                                editor.commit();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -51,6 +57,12 @@ public class AnniversaryFragment extends Fragment {
         });
         return view;
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String text = prefs.getString("Anni", "");
+        tv.setText(text);
+    }
 
 }
